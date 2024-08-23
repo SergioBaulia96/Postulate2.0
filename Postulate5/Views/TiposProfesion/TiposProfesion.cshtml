@@ -1,0 +1,99 @@
+<body class="color-fondo-body">
+
+
+
+
+
+
+
+  <h2 style="text-align: center; " class=" titulos">Carga de Tipos de Profesion</h2>
+
+  <!-- Button trigger modal -->
+  <div class="mb-2 text-center">
+
+    <button type="button" class="btn btn-primary botones" data-bs-toggle="modal" data-bs-target="#ModalProfesion"><i
+        class="fa-light fa-newspaper"></i>Crear </button>
+    <button type="button" onclick="ListadoProfesion()" class="btn btn-primary botones">
+      Cargar
+    </button>
+  </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="ModalProfesion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalTitulo"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping"></span>
+            <input type="hidden" id="ProfesionID" value="0">
+            <label for="nombreProfesion" class="form-label">Profesion</label>
+
+            <input type="text" class="form-control" id="nombreProfesion" placeholder="Nombre del tipo Profesion">
+          </div>
+
+          
+          <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping"></span>
+            <input type="hidden" id="" value="0">
+            <label for="matricula" class="form-label">Matricula</label>
+
+            <input type="text" class="form-control" id="matricula" placeholder="Matricula">
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+            data-bs-dismiss="modal" onclick="LimpiarModal()">Cancelar</button>
+          <button type="button" class="btn btn-primary"  id="btnGuardar" onclick="GuardarProfesion()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <div class="Tablaposicion">
+    <table class="table tabla  table-hover justify-content: center  ;">
+      <thead class="cabeza">
+        <tr>
+          <th>Nombre</th>
+          <th>Matricula</th>
+
+
+          <th></th>
+          <th></th>
+
+        </tr>
+      </thead>
+      <tbody id="tbody-Profesion">
+      </tbody>
+    </table>
+  </div>
+
+  </div>
+
+
+
+
+  @section Scripts {
+
+    <script src="~/js/TiposProfesion.1.0.0.js"></script>
+  }
+
+
+
+
+
+
+</body>
