@@ -13,7 +13,9 @@
     <link rel="icon" href="~/img/icono.ico" type="image/x-icon">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Localidad.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/persona.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/administracion.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Postulate.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/MDB5/css/mdb.min.css" asp-append-version="true" />
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
@@ -23,11 +25,13 @@
 </head>
 
 <body>
+    <header></header>
     @if (!hideSidebar)
     {
+<header class="encabezado">
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand me-auto" href="#">Postulate</a>
+            <a class="navbar-brand me-auto" style="color:#241199" href="#">Postulate</a>
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
@@ -38,7 +42,7 @@
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                         <li class="nav-item">
                             <a class="nav-link mx-lg-2" asp-area="" asp-controller="home" asp-action="Index">
-                                <i class="lni lni-agenda"></i>
+                                <i class="lni lni-home"></i>
                                 <span class="titulo-navbar">Home</span>
                             </a>
                         </li>
@@ -60,7 +64,7 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link mx-lg-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            <a class="nav-link mx-lg-2 dropdown-toggle" style="color:#241199" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 Administracion
                             </a>
@@ -71,7 +75,7 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link mx-lg-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            <a class="nav-link mx-lg-2 dropdown-toggle" style="color:#241199;" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 Vistas
                             </a>
@@ -83,119 +87,15 @@
                     </ul>
                 </div>
             </div>
-            <a href="#" class="login-button">Login</a>
+            <a class="login-button text-light" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index","Home", new { area = "" })">Logout</a>
             <button class="navbar-toggler pe-3" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </nav>
+    </header>
     }
-
-
-
-
-
-    @* <div class="">
-    @if (!hideSidebar)
-    {
-    <aside id="sidebar" class="expand"> <!-- Añade la clase "expand" directamente -->
-    <div class="d-flex">
-    <!-- Elimina el botón de toggle -->
-    <div class="sidebar-logo">
-    <a href="#">Postulate</a>
-    </div>
-    </div>
-    <ul class="sidebar-nav">
-    <li class="sidebar-item">
-    <a class="sidebar-link" asp-area="" asp-controller="Persona" asp-action="Index">
-    <i class="lni lni-user"></i>
-    <span class="titulo-navbar">Usuario</span></a>
-    </li>
-    <li class="sidebar-item">
-    <a class="sidebar-link" asp-area="" asp-controller="Servicios" asp-action="Index">
-    <i class="lni lni-agenda"></i>
-    <span class="titulo-navbar">Servicios</span>
-    </a>
-    </li>
-    <li class="sidebar-item">
-    <a class="sidebar-link" asp-area="" asp-controller="home" asp-action="Index">
-    <i class="lni lni-agenda"></i>
-    <span class="titulo-navbar">home</span>
-    </a>
-    </li>
-    <li class="sidebar-item">
-    <a class="sidebar-link" asp-area="" asp-controller="Trabajo" asp-action="Index">
-    <i class="lni lni-cog"></i>
-    <span class="titulo-navbar">Trabajos</span>
-    </a>
-    </li>
-    <li class="sidebar-item">
-    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#multi"
-    aria-expanded="false" aria-controls="multi">
-    <i class="lni lni-layout"></i>
-    <span class="titulo-navbar">Administracion</span>
-    </a>
-    <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-    <!-- Enlaces directos en lugar de submenú -->
-    <li class="sidebar-item">
-    <a class="sidebar-link" asp-area="" asp-controller="Provincia" asp-action="Index">
-    Provincias
-    </a>
-    </li>
-    <li class="sidebar-item">
-    <a class="sidebar-link " asp-area="" asp-controller="Localidad" asp-action="Index">
-    Localidad
-    </a>
-    </li>
-    <li class="sidebar-item">
-    <a class="sidebar-link" asp-area="" asp-controller="TiposProfesion" asp-action="Index">
-    Tipos de Profesion
-    </a>
-    </li>
-    </ul>
-    </li>
-
-    <li class="sidebar-item">
-    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#vistaDropDown"
-    aria-expanded="false" aria-controls="vistaDropDown">
-    <i class="lni lni-eye"></i>
-    <span class="titulo-navbar">Vistas</span>
-    </a>
-    <ul id="vistaDropDown" class="sidebar-dropdown list-unstyled collapse">
-    <li class="sidebar-item">
-    <a class="sidebar-link" asp-area="" asp-controller="VistaServicio" asp-action="Index">Vista Servicios</a>
-    </li>
-    <li class="sidebar-item">
-    <a class="sidebar-link" asp-area="" asp-controller="VistaTrabajo" asp-action="Index">Vista Trabajos</a>
-    </li>
-    </ul>
-    </li>
-    </ul>
-    <div class="sidebar-footer">
-    <li class="sidebar-item">
-    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth"
-    aria-expanded="false" aria-controls="auth">
-    <i class="lni lni-protection"></i>
-    <span class="titulo-navbar">Iniciar</span>
-    </a>
-    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-    <li class="sidebar-item">
-    <a class="sidebar-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-    <li class="sidebar-item ">
-    <a class="sidebar-link " asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    </ul>
-    <a class="sidebar-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index",
-    "Home", new { area = "" })">
-    <i class="lni lni-exit"></i>
-    <span class="titulo-navbar">Logout</span>
-    </a>
-    </li>
-    </div>
-    </aside>
-    } *@
     <div class="main-content">
         <main role="main" class="pb-3">
             @RenderBody()

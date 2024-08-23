@@ -2,36 +2,27 @@
 @inject SignInManager<IdentityUser> SignInManager
 
 @{
-    ViewData["Title"] = "Home Page";
+  ViewData["Title"] = "Home Page";
 }
+<link rel="stylesheet" href="~/lib/MDB5/css/mdb.min.css" asp-append-version="true" />
 
-
-<style>
-  body{
-    background: url('/img/1567677.jpg') no-repeat;
-    background-size: cover;
-    }
-</style>
-
-<div class="text-center titulo">
-   <main>
-        <h1 class="titulo-home">Bienvenido, @ViewBag.NombrePersona Muestra tu Profesion en </h1>
-       
+<section class="container-home">
+  <h1 class="tit">Postulate.com</h1>
+  <div class="text-center titulo">
+    <main>
+      <h1 class="titulo-home">Bienvenido, @ViewBag.NombrePersona! </h1>
     </main>
-    <h1 class="tit">Postulate.com</h1>
-    <p class="sub">Presentate a la comunidad </a>.</p>
+    <p class="sub">¿Buscas empleo o necesitas contratar servicios? Postúlate con nosotros y conecta con las
+      mejores oportunidades y profesionales en tu área. Ya sea que estés buscando trabajo o necesites ayuda en casa,
+      estamos aquí para facilitarte el proceso. ¡Empieza hoy mismo!</p>
 
-</div>
-  <link rel="stylesheet" href="~/lib/MDB5/css/mdb.min.css" asp-append-version="true" />
-
-
-<div style="text-align: center;">
-  <button class="btn-donate">
-    <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Register">Register</a>
-  </button>
-  <button class="btn-donate">
-    <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
-  </button>
-</div>
-<h1 class="titulo-home-trabajo">¿sabias que podias postular un trabajo?</h1>
- 
+  </div>
+  <div style="text-align: center;">
+    <button class="btn-donate">
+      <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </button>
+    <button class="btn-donate">
+      <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </button>
+  </div>
+</section>

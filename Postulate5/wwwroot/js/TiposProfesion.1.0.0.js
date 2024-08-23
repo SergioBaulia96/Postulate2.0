@@ -23,14 +23,10 @@ function ListadoProfesion() {
                     <tr>
                         <td>${Profesion.nombre}</td>
                         <td>${Profesion.matricula}</td>
-
-                       
-                        <td class="text-center"></td>
-                        
-                        <td class="text-center"></td>
-                        <td class="text-center">
-                        <button type="button" class="btn btn-success" onclick="AbrirModalEditar(${Profesion.profesionID})"> <i class="fa-regular fa-pen-to-square"></i> Editar</button>
-                        <button type="button" class="btn btn-danger" onclick="EliminarProfesion(${Profesion.profesionID})"> <i class="fa-regular fa-trash-can"></i> Eliminar  </button>
+                        <td>
+                        <button type="button" class="btn btn-success" onclick="AbrirModalEditar(${Profesion.profesionID})"> <i class="fa-regular fa-pen-to-square"></i> Editar</button></td>
+                        <td>
+                        <button type="button" class="btn btn-danger" onclick="EliminarProfesion(${Profesion.profesionID})"> <i class="fa-regular fa-trash-can"></i> Eliminar  </button></td>
                     </tr>`;
                 }
             });

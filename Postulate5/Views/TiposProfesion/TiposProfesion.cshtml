@@ -3,19 +3,14 @@
 
 
 
-
-
-
-  <h2 style="text-align: center; " class=" titulos">Carga de Tipos de Profesion</h2>
+<section class="container-profesion">
+  <h1 class="titulos">Tipos de Profesion</h1>
 
   <!-- Button trigger modal -->
-  <div class="mb-2 text-center">
-
-    <button type="button" class="btn btn-primary botones" data-bs-toggle="modal" data-bs-target="#ModalProfesion"><i
-        class="fa-light fa-newspaper"></i>Crear </button>
-    <button type="button" onclick="ListadoProfesion()" class="btn btn-primary botones">
-      Cargar
-    </button>
+  <div class="">
+      <button type="button" class="Btn" data-bs-toggle="modal" data-bs-target="#ModalProfesion">  
+      <div class="sign">+</div>
+      <div class="text">Agregar</div></button>
   </div>
 
 
@@ -59,31 +54,21 @@
 
 
 
+<div class="tbl-profesion">
+<table class="table table-ligth table-striped">
+  <thead>
+      <tr class="align-bottom">
+          <th style="width: 400px;">Nombre</th>
+          <th style="width: 400px;">Matricula</th>
+          <th style="width: 70px;">Editar</th>
+          <th style="width: 70px;">Eliminar</th>
+      </tr>
+    <tbody id="tbody-Profesion"></tbody>
+  </thead>
+</table>
+</div>
 
-
-
-
-  <div class="Tablaposicion">
-    <table class="table tabla  table-hover justify-content: center  ;">
-      <thead class="cabeza">
-        <tr>
-          <th>Nombre</th>
-          <th>Matricula</th>
-
-
-          <th></th>
-          <th></th>
-
-        </tr>
-      </thead>
-      <tbody id="tbody-Profesion">
-      </tbody>
-    </table>
-  </div>
-
-  </div>
-
-
+</section>
 
 
   @section Scripts {
