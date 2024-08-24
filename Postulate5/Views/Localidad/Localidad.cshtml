@@ -2,26 +2,15 @@
   <link rel="stylesheet" href="~/css/Localidad.css" asp-append-version="true" />
 </head>
 <body class="color-fondo-body">
-  
-
-
-
-
-
-
-<h2 style="text-align: center; " class=" titulos">Carga de Localidades</h2>
-
+<section class="container-administracion">
+<h1 class="titulos">Localidades</h1>
 <!-- Button trigger modal -->
-<div class="mb-2 text-center">
- 
-    <button type="button" class="btn btn-primary botones" data-bs-toggle="modal" data-bs-target="#ModalLocalidad"><i class="fa-light fa-newspaper"></i>Crear Localidad</button>
-     <button type="button"    onclick="ListadoLocalidad()" class="btn btn-primary botones">
-      Cargar 
+<div>
+    <button type="button" class="Btn" data-bs-toggle="modal" data-bs-target="#ModalLocalidad">
+      <div class="sign">+</div>
+      <div class="text">Agregar</div>
     </button>
-  </div>
-
-
-   
+</div>
 
 
 <!-- Modal -->
@@ -67,39 +56,25 @@
 </div>
 
 
-
-
-
-
-
-<div class="Tablaposicion">
-  <table class="table table-hover">
+<div class="tbl-administracion" style="overflow: hidden; border-radius: 20px;">
+  <table class="table table-dark table-striped" style="border-radius: 20px; overflow: hidden; width: 100%;">
     <thead>
       <tr>
-        <th>Provincia</th> 
-        <th>Nombre</th> 
-        <th>Codigo Postal</th>  
-        <th></th>
-        <th></th>
+        <th style="background-color: #241199;">Provincia</th>
+        <th style="background-color: #241199;">Localidad</th>
+        <th style="background-color: #241199;">Codigo Postal</th>
+        <th style="width: 150px; background-color: #241199;">Editar</th>
+        <th style="width: 110px; background-color: #241199;">Eliminar</th>
       </tr>
     </thead>
-    <tbody id="tbody-Localidades">
-      <!-- Los datos de la tabla se cargarán aquí -->
-    </tbody>
+    <tbody id="tbody-Localidades"></tbody>
   </table>
 </div>
 
-
+</section>
 
 
 @section Scripts {
-  
-   <script src="~/js/Localidad.1.0.0.js"></script>
-}
-
-
-
-
-
+  <script src="~/js/Localidad.1.0.0.js"></script>}
 
 </body>
