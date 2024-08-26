@@ -9,7 +9,7 @@ public class Servicio
     public int PersonaID { get; set; }
     public int ProfesionID { get; set; }
 
-    public int? ImagenID { get; set; }
+    //public int? ImagenID { get; set; }
     public bool Herramienta { get; set; }
 
     // public byte Imagen { get; set; }
@@ -18,8 +18,6 @@ public class Servicio
     public string? Institucion { get; set; }
     public virtual Persona Persona { get; set; }
     public virtual Profesion Profesion { get; set; }
-    public virtual Imagen Imagen { get; set; }
-
 
     //   public virtual ICollection <ContratoRespondido> ContratosRespondidos { get; set; } 
 }

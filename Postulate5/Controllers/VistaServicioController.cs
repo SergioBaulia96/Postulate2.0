@@ -119,7 +119,7 @@ public JsonResult CardServicios(int? servicioID, string NombreProfesion)
                 ServicioID = ServicioID,
                 PersonaID = PersonaID,
                 ProfesionID = ProfesionID,
-                 ImagenID = ImagenID,
+                //  ImagenID = ImagenID,
                 
                 Herramienta = herramienta,
                 Descripcion = descripcion,
@@ -141,7 +141,7 @@ public JsonResult CardServicios(int? servicioID, string NombreProfesion)
         {
             servicioEditar.PersonaID = PersonaID;
             servicioEditar.ProfesionID = ProfesionID;
-            servicioEditar.ImagenID = ImagenID;
+            // servicioEditar.ImagenID = ImagenID;
             servicioEditar.Herramienta = herramienta;
             servicioEditar.Descripcion = descripcion;
             servicioEditar.Titulo = titulo;
@@ -287,7 +287,7 @@ public JsonResult RecuperarPerfilServicio(int id)
     var servicios = _context.Servicios
         .Include(s => s.Persona)
         .Include(s => s.Profesion) 
-        .Include(s => s.Imagen)
+        // .Include(s => s.Imagen)
         .ToList();
 
     
@@ -301,7 +301,7 @@ public JsonResult RecuperarPerfilServicio(int id)
         ServicioID = p.ServicioID,
         PersonaID = p.PersonaID,
         ProfesionID = p.ProfesionID,
-        ImagenID = p.ImagenID,
+        // ImagenID = p.ImagenID,
         NombrePersona = p.Persona.Nombre,
         ApellidoPersona = p.Persona.Apellido,
         TelefonoPersona = p.Persona.Telefono,

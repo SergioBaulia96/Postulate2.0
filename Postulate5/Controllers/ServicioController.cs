@@ -24,10 +24,15 @@ namespace Postulate.Controllers
         public IActionResult Index()
         {
 
-            // recuperar el correo
+            // recuperar el correo, esto es para la card, el filtro por servicio
 
             var usuarioLogueado = _userManager.GetUserAsync(HttpContext.User).Result;
             var correoUsuarioLogueado = usuarioLogueado?.Email;
+
+                // Obtener la persona asociada al correo del usuario logueado
+    var personaLogueada = _context.Personas.FirstOrDefault(p => p.Email == correoUsuarioLogueado);
+    var personaIDLogueada = personaLogueada?.PersonaID;
+    var nombrePersonaLogueada = personaLogueada?.Nombre;
 
 
             var profesiones = _context.Profesiones.ToList();
@@ -43,6 +48,9 @@ namespace Postulate.Controllers
             ViewBag.BuscarPersonaID = new SelectList(personas.OrderBy(c => c.Nombre), "PersonaID", "Nombre");
 
 
+   // Pasar el ID y nombre de la persona logueada a la vista
+    ViewBag.PersonaIDLogueada = personaIDLogueada;
+    ViewBag.NombrePersonaLogueada = nombrePersonaLogueada;
 
             return View("Servicio");
         }
@@ -117,40 +125,31 @@ namespace Postulate.Controllers
 
 
 
-        public JsonResult AgregarServicio(int id, int ServicioID, int PersonaID, int ProfesionID, int? ImagenID, string? nombrePersona, string? nombreProfesion, int? telefonoPersona, bool herramienta, string? descripcion, string? titulo, string? Institucion)
+        public JsonResult AgregarServicio(int ServicioID, int PersonaID, int ProfesionID, bool herramienta, string? descripcion, string? titulo, string? Institucion)
         {
             var servicioExistente = _context.Servicios.FirstOrDefault(s => s.PersonaID == PersonaID && s.ProfesionID == ProfesionID);
 
             if (servicioExistente != null)
             {
-
                 if (ServicioID == 0 || servicioExistente.ServicioID != ServicioID)
                 {
                     return Json(new { success = false, message = "La combinación de persona y profesión ya existe." });
                 }
             }
 
-
-
             string resultado = "";
 
             if (ServicioID == 0)
             {
-
-
                 var servicio = new Servicio
-                {
-                    ServicioID = ServicioID,
+                {                   
                     PersonaID = PersonaID,
                     ProfesionID = ProfesionID,
-                    ImagenID = ImagenID,
-
                     Herramienta = herramienta,
                     Descripcion = descripcion,
                     Titulo = titulo,
                     Institucion = Institucion
                 };
-
                 _context.Add(servicio);
                 _context.SaveChanges();
 
@@ -162,16 +161,11 @@ namespace Postulate.Controllers
                 // Actualizar un servicio existente
                 var servicioEditar = _context.Servicios.FirstOrDefault(e => e.ServicioID == ServicioID);
                 if (servicioEditar != null)
-                {
-                    servicioEditar.PersonaID = PersonaID;
-                    servicioEditar.ProfesionID = ProfesionID;
-                    servicioEditar.ImagenID = ImagenID;
+                {                                         
                     servicioEditar.Herramienta = herramienta;
                     servicioEditar.Descripcion = descripcion;
                     servicioEditar.Titulo = titulo;
-                    servicioEditar.Institucion = Institucion;
-
-                    _context.Update(servicioEditar);
+                    servicioEditar.Institucion = Institucion;                  
                     _context.SaveChanges();
 
                     return Json(new { success = true, message = "Servicio actualizado exitosamente." });
@@ -181,9 +175,6 @@ namespace Postulate.Controllers
                     return Json(new { success = false, message = "Servicio no encontrado." });
                 }
             }
-
-
-
 
         }
 
@@ -314,8 +305,7 @@ namespace Postulate.Controllers
 
             var servicios = _context.Servicios
                 .Include(s => s.Persona)
-                .Include(s => s.Profesion)
-                .Include(s => s.Imagen)
+                .Include(s => s.Profesion)              
                 .ToList();
 
 
@@ -328,8 +318,7 @@ namespace Postulate.Controllers
             {
                 ServicioID = p.ServicioID,
                 PersonaID = p.PersonaID,
-                ProfesionID = p.ProfesionID,
-                ImagenID = p.ImagenID,
+                ProfesionID = p.ProfesionID,              
                 NombrePersona = p.Persona.Nombre,
                 ApellidoPersona = p.Persona.Apellido,
                 TelefonoPersona = p.Persona.Telefono,

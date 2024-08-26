@@ -13,9 +13,8 @@ public class Imagen
 
     public byte? Foto { get; set; }
 
-    
+    public int ServicioID { get; set; }
 
- public virtual ICollection <Servicio> Servicio { get; set; }
 
  public virtual ICollection <Trabajo> Trabajo { get; set; }
 
