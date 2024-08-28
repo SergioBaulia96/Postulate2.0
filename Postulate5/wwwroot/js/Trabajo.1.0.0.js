@@ -14,32 +14,40 @@ function CardTrabajos() {
                     <div class="profesion-group">
                         <h3 class="text-center">${tipoProfesion.nombre}</h3>
                         <div class="row justify-content-start">`;
-
-                $.each(tipoProfesion.listadoPersonas, function (index, persona) {
-                    contenidoCard += `
-                        <div class="col-md-4 col-sm-6 d-flex align-items-stretch card-container" id="card-${persona.trabajoID}">
-                            <div class="tamaniocard">
-                                <div class="card-content">
-                                    <p class="lugar"> <strong>Nombre:</strong>${persona.nombrePersona}</p>
-                                    <p class="lugar"><strong>Apellido:</strong> ${persona.apellidoPersona}</p>
-                                      <p class="lugar"><strong>Teléfono:</strong> ${persona.telefonoPersona}</p>
-                                    <p class="lugar"><strong>Direccion:</strong> ${persona.direccion}</p>
-                                    <p class="lugar"><strong>Descrpicion:</strong> ${persona.descripcion}</p>
-                                   <p class="lugar"><strong>Hora:</strong>${persona.hora}</p>
-                                    <p class="lugar"><strong>Fecha de inicio:</strong>${persona.fecha}</p>
-                                   <p class="lugar"><strong>Comentario:</strong> ${persona.comentario}</p>
-                                    <div class="card-action">
-                                        <button type="button" class="btn btn-success" onclick="EditarTrabajo(${persona.trabajoID})">
-                                            <i class="fa-regular fa-pen-to-square"></i> Editar
-                                        </button>
-                                        <button type="button" class="btn btn-danger" onclick="EliminarTrabajo(${persona.trabajoID})">
-                                            <i class="fa-regular fa-trash-can"></i> Eliminar
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`;
-                });
+                             $.each(tipoProfesion.listadoPersonas, function (index, persona) {
+                            contenidoCard += `
+                                <div class="" id="card-${persona.trabajoID}">
+                                    <a href="javascript:cargarPerfil(${persona.trabajoID})" class="text-decoration-none text-dark w-100">
+                                        <div class="card mb-3 h-100" >
+                                            <div class="row g-0 h-100">
+                                                <div class="col-md-4">
+                                                    <div class="card-bg color-Card" style="width: 1em; height: 100%;"></div>
+                                                </div>
+                                                <div class="col-md-8 d-flex flex-column ">
+                                                    <div class="card-body flex-grow-1 overflow-auto" style="max-height: 400px;">
+                                                        <p class=""><strong>Nombre:</strong> ${persona.nombrePersona}</p>
+                                                        <p class=""><strong>Apellido:</strong> ${persona.apellidoPersona}</p>
+                                                        <p class=""><strong>Teléfono:</strong> ${persona.telefonoPersona}</p>
+                                                        <p class=""><strong>Dirección:</strong> ${persona.direccion}</p>
+                                                        <p class=""><strong>Descripción:</strong> ${persona.descripcion}</p>
+                                                        <p class=""><strong>Hora:</strong> ${persona.hora}</p>
+                                                        <p class=""><strong>Fecha de inicio:</strong> ${persona.fecha}</p>
+                                                        <p class=""><strong>Comentario:</strong> ${persona.comentario}</p>
+                                                    </div>
+                                                    <div class="card-action mt-3">
+                                                        <button type="button" class="btn btn-success me-2" onclick="EditarTrabajo(${persona.trabajoID})">
+                                                            <i class="fa-regular fa-pen-to-square"></i> Editar
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger me-2" onclick="EliminarTrabajo(${persona.trabajoID})">
+                                                            <i class="fa-regular fa-trash-can"></i> Eliminar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>`;
+                        });
 
                 contenidoCard += `</div></div>`;
             });
@@ -69,6 +77,7 @@ function agregarTrabajo() {
     let comentario = document.getElementById("comentario").value;
 
 
+    // Crear un objeto FormData para enviar archivos
 
     let formData = new FormData();
 
@@ -141,20 +150,21 @@ function agregarTrabajo() {
 //     });
 // }
 
-function EditarTrabajo(trabajoID) {
+function EditarTrabajo() {
+    let trabajoID = document.getElementById("TrabajoID").value;
     $.ajax({
         url: '/Trabajo/CardTrabajos',
         data: { id: trabajoID },
         type: 'POST',
         dataType: 'json',
-        success: function (vistaTrabajoPersonas) {
-            let trabajo = vistaTrabajoPersonas[0];
+        success: function (trabajos) {
+            let trabajo = trabajos[0];
 
 
-            document.getElementById("TrabajoID").value = trabajoID;
+            // document.getElementById("TrabajoID").value = trabajoID;
 
-            document.getElementById("PersonaID").value = trabajo.personaID;
-            document.getElementById("ProfesionID").value = trabajo.profesionID;
+            // document.getElementById("PersonaID").value = trabajo.personaID;
+            // document.getElementById("ProfesionID").value = trabajo.profesionID;
             document.getElementById("descripcion").value = trabajo.descripcion;
             document.getElementById("hora").value = trabajo.hora;
             document.getElementById("fecha").value = trabajo.fecha;

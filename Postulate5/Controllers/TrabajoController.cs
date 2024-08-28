@@ -25,6 +25,18 @@ public class TrabajoController : Controller
     public IActionResult Index()
     {
 
+                    // recuperar el correo, esto es para la card, el filtro por servicio
+                 var usuarioLogueado = _userManager.GetUserAsync(HttpContext.User).Result;
+            var correoUsuarioLogueado = usuarioLogueado?.Email;
+
+
+                           // Obtener la persona asociada al correo del usuario logueado
+    var personaLogueada = _context.Personas.FirstOrDefault(p => p.Email == correoUsuarioLogueado);
+    var personaIDLogueada = personaLogueada?.PersonaID;
+    var nombrePersonaLogueada = personaLogueada?.Nombre;
+
+
+
         var profesiones = _context.Profesiones.ToList();
         profesiones.Add(new Profesion { ProfesionID = 0, Nombre = "[SELECCIONE...]" });
 
@@ -35,7 +47,15 @@ public class TrabajoController : Controller
 
         ViewBag.PersonaID = new SelectList(personas.OrderBy(c => c.Nombre), "PersonaID", "Nombre");
         ViewBag.BuscarPersonaID = new SelectList(personas.OrderBy(c => c.Nombre), "PersonaID", "Nombre");
+
+
+   // Pasar el ID y nombre de la persona logueada a la vista
+    ViewBag.PersonaIDLogueada = personaIDLogueada;
+    ViewBag.NombrePersonaLogueada = nombrePersonaLogueada;
+
         return View("Trabajo");
+
+
 
 
     }
@@ -105,7 +125,7 @@ public class TrabajoController : Controller
         return Json(tiposProfesionMostrar);
     }
 
-      public JsonResult AgregarTrabajo(int id, int PersonaID, int TrabajoID, int ProfesionID, int? ImagenID, string direccion, string descripcion, DateTime hora, DateTime fecha, int valoracion, string comentario)
+      public JsonResult AgregarTrabajo( int PersonaID, int TrabajoID, int ProfesionID, int? ImagenID, string direccion, string descripcion, DateTime hora, DateTime fecha, int valoracion, string comentario)
     {
 
         var trabajoExistente = _context.Trabajos.FirstOrDefault(s => s.PersonaID == PersonaID && s.ProfesionID == ProfesionID);
@@ -125,9 +145,9 @@ public class TrabajoController : Controller
             {
 
                 PersonaID = PersonaID,
-                TrabajoID = TrabajoID,
+             
                 ProfesionID = ProfesionID,
-                ImagenID = ImagenID,
+       
                 Direccion = direccion,
                 Descripcion = descripcion,
                  Hora = hora,
@@ -144,14 +164,14 @@ public class TrabajoController : Controller
     
 
     }else{
-            var trabajoEditar = _context.Trabajos.Where(t => t.TrabajoID == TrabajoID).SingleOrDefault();
+            var trabajoEditar = _context.Trabajos.FirstOrDefault (t => t.TrabajoID == TrabajoID);
             if (trabajoEditar != null)
             {
              
 
                 trabajoEditar.ProfesionID = ProfesionID;
-                trabajoEditar.PersonaID = PersonaID;
-                trabajoEditar.ImagenID = ImagenID;
+           
+         
                 trabajoEditar.Direccion = direccion;
                 trabajoEditar.Descripcion = descripcion;
                 trabajoEditar.Hora = hora;
@@ -161,17 +181,17 @@ public class TrabajoController : Controller
                  
             _context.SaveChanges();
 
-            return Json(new { success = true, message = "Trabajo actualizado exitosamente." });
+                 return Json(new { success = true, message = "trabajo actualizado exitosamente." });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "trabajo no encontrado." });
+                }
                 
             }
     }
 
-        return Json(true);
-
-    }
-
-    
- public JsonResult  EliminarTrabajo (int trabajoID)
+       public JsonResult  EliminarTrabajo (int trabajoID)
  {
 
       
@@ -188,6 +208,11 @@ public class TrabajoController : Controller
     
 
     }
+
+    
+ 
+
+    
 
     
 
