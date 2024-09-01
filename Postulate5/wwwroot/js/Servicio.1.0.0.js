@@ -20,8 +20,7 @@ function agregarServicio() {
     formData.append("ServicioID", servicioID);
     formData.append("PersonaID", personaID);
     formData.append("ProfesionID", profesionID);
-    //  formData.append("Nombre", nombre);
-    // formData.append("Imagen", imagen);
+ 
     formData.append("Herramienta", herramienta);
     formData.append("Descripcion", descripcion);
     formData.append("Titulo", titulo);
@@ -79,7 +78,6 @@ function EditarServicio() {
                 
                 document.getElementById("descripcion").value = servicio.descripcion;
                 document.getElementById("herramienta").checked = servicio.herramienta;
-                
                 document.getElementById("titulo").value = servicio.titulo;
                 document.getElementById("institucion").value = servicio.institucion;
                 $('#agregarServicio').modal('show');

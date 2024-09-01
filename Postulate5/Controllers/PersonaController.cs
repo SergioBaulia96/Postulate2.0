@@ -177,5 +177,51 @@ public ActionResult Guardar(int localidadId, int? personaID, string nombre, stri
     return Json(resultado);
 }
 
+
+
+
+public IActionResult VistaPersona()
+        {
+
+            
+             return View("VistaPersona");
+          
+        }
+
+
+    public JsonResult RecuperarPerfilPersona(int id)
+{
+    var personas = _context.Personas
+        .Include(p => p.Localidad) // Asegúrate de incluir la entidad Localidad
+        .ToList();
+
+    if (id > 0)
+    {
+        personas = personas.Where(p => p.PersonaID == id).ToList();
+    }
+
+    var personaMostrar = personas.Select(p => new VistaTraerDatosPersonal
+    {
+        PersonaID = p.PersonaID,    
+        NombreLocalidad = p.Localidad.Nombre,
+        Nombre = p.Nombre,
+        Apellido = p.Apellido,
+        Telefono = p.Telefono,
+        Edad = p.Edad,
+        Documento = p.Documento,
+        Email = p.Email,
+    }).ToList();
+
+    return Json(personaMostrar);
 }
+
+
+}
+
+
+
+
+
+   
+         
 

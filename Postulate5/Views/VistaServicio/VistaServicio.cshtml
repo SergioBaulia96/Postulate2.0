@@ -11,18 +11,10 @@
 <body>
     
     <h1 style="text-align: center;">Servicios Disponibles ahora  cambios</h1>
-@*  buscador *@
- @* <div class="col-md-6">
-    <label for="ProfesionID" class="form-label">Profesion</label>
-    @Html.DropDownList("ProfesionID", null, htmlAttributes: new { @class = "form-control", id = "ProfesionID", onchange = "CardServicios()" })
-</div>  
- *@
 
     <!-- Otros elementos de la página -->
    
-   @* <div class="boton-container">
-  <button type="button" class="btn btn-primary boton" data-bs-toggle="modal" data-bs-target="#agregarServicio">Agregar Servicio</button>
-</div> *@
+
 <div class="conte">
     <div class="contenedor-card card id=" ServicioID">
 
@@ -44,48 +36,18 @@
                        <div class="col-md-6">
                 <label for="ProfesionID" class="form-label">Profesion</label>
                 @Html.DropDownList("ProfesionID", null, htmlAttributes: new { @class = "form-control", id = "ProfesionID" })
-               </div>
-
-             
-             
-    
-                        
+               </div>              
                         <div class="col-md-6">
                             <label for="PersonaID" class="form-label">Nombre</label>
                             @Html.DropDownList("PersonaID", null, htmlAttributes: new { @class = "form-control" })
                         </div>
-
-                        @* <div class="col-md-6">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" id="nombre" class="form-control" placeholder="Nombre">
-                        </div> *@
-
-                        @* <div class="col-md-6">
-                            <label for="imagen" class="form-label">Imagen</label>
-                            <input type="file" id="imagen" class="form-control" placeholder="Imagen">
-                        </div> *@
-
-                        <div class="col-md-6">
+                    <div class="col-md-6">
                             <div class="form-check">
                                 <input type="checkbox" id="herramientas" class="form-check-input">
                                 <label for="herramientas" class="form-check-label">Herramientas</label>
                             </div>
                         </div>
-@* 
-                        <div class="col-md-6">
-                            <label for="descripcion" class="form-label">Descripción</label>
-                            <input type="text" id="descripcion" class="form-control" placeholder="Descripción">
-                        </div> *@
-
-                        @* <div class="col-md-6">
-                            <label for="titulo" class="form-label">Título</label>
-                            <input type="text" id="titulo" class="form-control" placeholder="Título">
-                        </div> *@
-@* 
-                        <div class="col-md-6">
-                            <label for="institucion" class="form-label">Institución</label>
-                            <input type="text" id="institucion" class="form-control" placeholder="Institución">
-                        </div> *@
+                   
                     </form>
                 </div>
                 <div class="modal-footer">

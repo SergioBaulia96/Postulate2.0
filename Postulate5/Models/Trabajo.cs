@@ -89,14 +89,24 @@ public class VistaTrabajoPersonas
   public int TrabajoID { get; set; }
 
 
+  public int ProfesionID { get; set; }
   public int? ImagenID { get; set; }
 
   public string? Telefono { get; set; }
 
   public string? Direccion { get; set; }
   public string? Descripcion { get; set; }
+
+
+
+
   public DateTime Hora { get; set; }
-  public DateTime Fecha { get; set; }
+  public string? Horastring { get; set; }
+
+  public DateTime Fecha { get; set; } 
+   public string?  Fechastring { get; set; }
+
+   
   public string? Comentario { get; set; }
 
 

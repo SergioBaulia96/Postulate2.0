@@ -79,36 +79,6 @@ function enviarFormularioAjax() {
 }
 
 
-function AbrirModalEditar(PersonaID) {
-
-    $.ajax({
-        url: '../../Persona/TraerDatosPersonal',
-        data: { PersonaID: 4 },
-        type: 'POST',
-        dataType: 'json',
-        success: function (personas) {
-            let persona = personas[0];
-
-            document.getElementById("PersonaID").value = PersonaID;
-            // $("#ModalTitulo").text("Editar Tipo De ejercico");
-            document.getElementById("nombre").value = persona.nombre;
-            document.getElementById("apellido").value = persona.apellido;
-            document.getElementById("edad").value = persona.edad;
-            document.getElementById("telefono").value = persona.telefono;
-            document.getElementById("documento").value = persona.documento;
-          
-
-            $("#ModalFormulario").modal("show");
-
-        },
-        error: function (xhr, status) {
-
-            alert('Disculpe, existió un problema ');
-        }
-
-    });
-
-}
 
 
 

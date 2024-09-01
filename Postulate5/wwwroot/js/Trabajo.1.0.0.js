@@ -17,7 +17,7 @@ function CardTrabajos() {
                              $.each(tipoProfesion.listadoPersonas, function (index, persona) {
                             contenidoCard += `
                                 <div class="" id="card-${persona.trabajoID}">
-                                    <a href="javascript:cargarPerfil(${persona.trabajoID})" class="text-decoration-none text-dark w-100">
+                              
                                         <div class="card mb-3 h-100" >
                                             <div class="row g-0 h-100">
                                                 <div class="col-md-4">
@@ -70,6 +70,7 @@ function agregarTrabajo() {
     let personaID = document.getElementById("PersonaID").value;
     let trabajoID = document.getElementById("TrabajoID").value;
     let profesionID = document.getElementById("ProfesionID").value;
+   
     let descripcion = document.getElementById("descripcion").value;
     let direccion = document.getElementById("direccion").value;
     let hora = document.getElementById("hora").value;
@@ -78,12 +79,12 @@ function agregarTrabajo() {
 
 
     // Crear un objeto FormData para enviar archivos
-
     let formData = new FormData();
 
-    formData.append("TrabajoID", trabajoID);
     formData.append("PersonaID", personaID);
+    formData.append("TrabajoID", trabajoID);
     formData.append("ProfesionID", profesionID);
+
     formData.append("descripcion", descripcion);
     formData.append("direccion", direccion);
     formData.append("hora", hora);
@@ -91,93 +92,60 @@ function agregarTrabajo() {
     formData.append("comentario", comentario);
 
 
-
     $.ajax({
-        // URL para la petición
         url: '/Trabajo/AgregarTrabajo',
-        // Información a enviar
         data: formData,
-        // Especifica si será una petición POST
         type: 'POST',
-        // Tipo de información que se espera de respuesta
         dataType: 'json',
-        // Necesario para enviar archivos
         processData: false,
         contentType: false,
-        // Código a ejecutar si la petición es satisfactoria
         success: function (response) {
             if (response.success) {
                 alert("Trabajo guardado exitosamente");
-
                 $('#agregarTrabajo').modal('hide');
-
                 CardTrabajos();
             } else {
                 alert("Error al guardar el Trabajo: " + response.message);
             }
         },
-        // Código a ejecutar si la petición falla
         error: function (xhr, status) {
             console.log('Disculpe, existió un problema al guardar el Trabajo');
         }
     });
-
-
 }
 
-// function EditarTrabajo(TrabajoID) {
-//     $.ajax({
-//         url: '/Trabajo/CardTrabajos',
-//         data: { id: TrabajoID },
-//         type: 'GET',
-//         dataType: 'json',
-//         success: function (trabajo) {
-//             if (trabajo) {
-//                 document.getElementById("TrabajoID").value = trabajo.TrabajoID;
-//                 document.getElementById("PersonaID").value = trabajo.PersonaID;
-//                 document.getElementById("ProfesionID").value = trabajo.ProfesionID;
-//                 document.getElementById("descripcion").value = trabajo.Descripcion;
-//                 document.getElementById("hora").value = trabajo.Hora;
-//                 document.getElementById("fecha").value = trabajo.Fecha;
-//                 document.getElementById("direccion").value = trabajo.Direccion;
-//                 document.getElementById("comentario").value = trabajo.Comentario;
-//                 $('#agregarTrabajo').modal('show');
-//             }
-//         },
-//         error: function (xhr, status) {
-//             console.log('Disculpe, existió un problema al cargar el servicio para editar');
-//         }
-//     });
-// }
 
-function EditarTrabajo() {
-    let trabajoID = document.getElementById("TrabajoID").value;
+ function EditarTrabajo(TrabajoID) {
     $.ajax({
-        url: '/Trabajo/CardTrabajos',
-        data: { id: trabajoID },
+        url: '/Trabajo/RecuperarTrabajo',
+        data: { id: TrabajoID },
         type: 'POST',
         dataType: 'json',
         success: function (trabajos) {
-            let trabajo = trabajos[0];
+            if (trabajos && trabajos.length > 0) {
+                let trabajo = trabajos[0];
 
+                
+                ProfesionID
+                document.getElementById("ProfesionID").value = trabajo.profesionID;
+                document.getElementById("TrabajoID").value = trabajo.trabajoID;
+                document.getElementById("descripcion").value = trabajo.descripcion;
+                document.getElementById("hora").value = trabajo.hora;
+                document.getElementById("fecha").value = trabajo.fecha;
+                document.getElementById("direccion").value = trabajo.direccion;
+                document.getElementById("comentario").value = trabajo.comentario;
 
-            // document.getElementById("TrabajoID").value = trabajoID;
-
-            // document.getElementById("PersonaID").value = trabajo.personaID;
-            // document.getElementById("ProfesionID").value = trabajo.profesionID;
-            document.getElementById("descripcion").value = trabajo.descripcion;
-            document.getElementById("hora").value = trabajo.hora;
-            document.getElementById("fecha").value = trabajo.fecha;
-            document.getElementById("direccion").value = trabajo.direccion;
-            document.getElementById("comentario").value = trabajo.comentario;
-            $('#agregarTrabajo').modal('show');
-
+                $('#agregarTrabajo').modal('show');
+            } else {
+                alert("No se encontró el trabajo especificado.");
+            }
         },
         error: function (xhr, status) {
             console.log('Disculpe, existió un problema al cargar el servicio para editar');
         }
     });
 }
+
 
 function EliminarTrabajo(trabajoID) {
     $.ajax({

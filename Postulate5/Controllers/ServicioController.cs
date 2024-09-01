@@ -103,27 +103,6 @@ namespace Postulate.Controllers
     return Json(tiposProfesionMostrar);
 }
 
-    // var serviciosPlanos = servicios.Select(e => new VistaServicio
-            // {
-            //     ServicioID = e.ServicioID,
-            //     PersonaID = e.PersonaID,
-            //     ProfesionID = e.ProfesionID,
-            //     ImagenID = e.ImagenID,
-            //     NombrePersona = e.Persona.Nombre,
-            //     NombreProfesion = e.Profesion.Nombre,
-            //     TelefonoPersona = e.Persona.Telefono,
-            //     Herramienta = e.Herramienta,
-            //     Descripcion = e.Descripcion,
-            //     Titulo = e.Titulo,
-            //     Institucion = e.Institucion
-            // }).ToList();
-
-            // if (id != null)
-            // {
-            //     serviciosPlanos = serviciosPlanos.Where(t => t.ServicioID == id).ToList();
-            // }
-
-
 
         public JsonResult AgregarServicio(int ServicioID, int PersonaID, int ProfesionID, bool herramienta, string? descripcion, string? titulo, string? Institucion)
         {
@@ -178,18 +157,7 @@ namespace Postulate.Controllers
 
         }
 
-        //     public JsonResult ObtenerServicio(int id)
-        // {
-        //     var servicio = _context.Servicios.FirstOrDefault(s => s.ServicioID == id);
-        //     if (servicio == null)
-        //     {
-        //         return Json(new { success = false, message = "Servicio no encontrado." });
-        //     }
-
-        //     return Json(new { success = true, servicio });
-        // }
-        // }
-
+   
 
         public JsonResult EliminarServicio(int servicioID)
         {
@@ -214,91 +182,7 @@ namespace Postulate.Controllers
             return View("VistaServicio");
         }
 
-        //     public JsonResult RecuperarPerfilServicio(int id)
-        // {
-        //     var perfilServicio = _context.Servicios
-        //         .Where(p => p.ServicioID == id)
-        //         .Select(p => new VistaServicio
-        //         {
-        //             ServicioID = p.ServicioID,
-        //             PersonaID = p.PersonaID,
-        //             ProfesionID = p.ProfesionID,
-        //             ImagenID = p.ImagenID,
-        //             NombrePersona = p.Persona.Nombre,
-        //             ApellidoPersona = p.Persona.Apellido,
-        //             TelefonoPersona = p.Persona.Telefono,
-        //             EdadPersona = p.Persona.Edad,
-        //             DocumentoPersona = p.Persona.Documento,
-        //             NombreProfesion = p.Profesion.Nombre,
-        //             Herramienta = p.Herramienta,
-        //             Descripcion = p.Descripcion,
-        //             Titulo = p.Titulo,
-        //             Institucion = p.Institucion,
-        //             EmailPersona = p.Persona.Email,
-        //         })
-        //         .FirstOrDefault();
-
-        //     if (perfilServicio == null)
-        //     {
-        //         return Json(new { success = false, message = "ID no encontrado" });
-        //     }
-
-        //     return Json(new { success = true, data = perfilServicio });
-        // }
-
-
-        // }
-
-        //
-
-
-
-
-
-
-
-        //     public JsonResult RecuperarPerfilServicio(int id)
-        // {
-
-        //     var  idCard = _context.Servicios.Include(i => i.PersonaID ).ToList();
-        //     if(id != null)
-        //     {
-        //          var perfilServicio = _context.Servicios.Where(p => p.ServicioID == id).ToList();
-        //     }
-
-
-        //       var perfilMostrar = idCard .Select(p => new VistaServicio
-        //         {
-        //             ServicioID = p.ServicioID,
-        //             PersonaID = p.PersonaID,
-        //             ProfesionID = p.ProfesionID,
-        //             ImagenID = p.ImagenID,
-        //             NombrePersona = p.Persona.Nombre,
-        //             ApellidoPersona = p.Persona.Apellido,
-        //             TelefonoPersona = p.Persona.Telefono,
-        //             EdadPersona = p.Persona.Edad,
-        //             DocumentoPersona = p.Persona.Documento,
-        //             NombreProfesion = p.Profesion.Nombre,
-        //             Herramienta = p.Herramienta,
-        //             Descripcion = p.Descripcion,
-        //             Titulo = p.Titulo,
-        //             Institucion = p.Institucion,
-        //             EmailPersona = p.Persona.Email,
-        //         })
-        //         .ToList();
-
-
-
-
-        //         return Json(perfilMostrar);
-        // }
-
-
-        // }
-
-        // }
-
-
+    
 
         public JsonResult RecuperarPerfilServicio(int id)
         {

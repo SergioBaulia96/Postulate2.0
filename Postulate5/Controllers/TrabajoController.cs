@@ -11,13 +11,13 @@ namespace Postulate.Controllers;
 
 public class TrabajoController : Controller
 {
-      private readonly ILogger<TrabajoController> _logger;
+    private readonly ILogger<TrabajoController> _logger;
     private readonly ApplicationDbContext _context;
     private readonly UserManager<IdentityUser> _userManager;
 
-    public TrabajoController(ILogger<TrabajoController> logger, ApplicationDbContext context,UserManager<IdentityUser> userManager)
+    public TrabajoController(ILogger<TrabajoController> logger, ApplicationDbContext context, UserManager<IdentityUser> userManager)
     {
-           _logger = logger;
+        _logger = logger;
         _context = context;
         _userManager = userManager;
     }
@@ -25,15 +25,15 @@ public class TrabajoController : Controller
     public IActionResult Index()
     {
 
-                    // recuperar el correo, esto es para la card, el filtro por servicio
-                 var usuarioLogueado = _userManager.GetUserAsync(HttpContext.User).Result;
-            var correoUsuarioLogueado = usuarioLogueado?.Email;
+        // recuperar el correo, esto es para la card, el filtro por servicio
+        var usuarioLogueado = _userManager.GetUserAsync(HttpContext.User).Result;
+        var correoUsuarioLogueado = usuarioLogueado?.Email;
 
 
-                           // Obtener la persona asociada al correo del usuario logueado
-    var personaLogueada = _context.Personas.FirstOrDefault(p => p.Email == correoUsuarioLogueado);
-    var personaIDLogueada = personaLogueada?.PersonaID;
-    var nombrePersonaLogueada = personaLogueada?.Nombre;
+        // Obtener la persona asociada al correo del usuario logueado
+        var personaLogueada = _context.Personas.FirstOrDefault(p => p.Email == correoUsuarioLogueado);
+        var personaIDLogueada = personaLogueada?.PersonaID;
+        var nombrePersonaLogueada = personaLogueada?.Nombre;
 
 
 
@@ -49,9 +49,9 @@ public class TrabajoController : Controller
         ViewBag.BuscarPersonaID = new SelectList(personas.OrderBy(c => c.Nombre), "PersonaID", "Nombre");
 
 
-   // Pasar el ID y nombre de la persona logueada a la vista
-    ViewBag.PersonaIDLogueada = personaIDLogueada;
-    ViewBag.NombrePersonaLogueada = nombrePersonaLogueada;
+        // Pasar el ID y nombre de la persona logueada a la vista
+        ViewBag.PersonaIDLogueada = personaIDLogueada;
+        ViewBag.NombrePersonaLogueada = nombrePersonaLogueada;
 
         return View("Trabajo");
 
@@ -62,7 +62,7 @@ public class TrabajoController : Controller
 
 
 
-       public async Task<JsonResult> CardTrabajos(int id, string NombreProfesion)
+    public async Task<JsonResult> CardTrabajos(int id, string NombreProfesion)
     {
         var usuarioLogueado = await _userManager.GetUserAsync(HttpContext.User);
         var correoUsuarioLogueado = usuarioLogueado?.Email;
@@ -115,7 +115,8 @@ public class TrabajoController : Controller
                 Direccion = trabajo.Direccion,
                 Descripcion = trabajo.Descripcion,
                 Hora = trabajo.Hora,
-                Fecha = trabajo.Fecha,
+                Horastring = trabajo.Hora.ToString("dd/MM/yyyy HH:mm"),
+                Fechastring = trabajo.Fecha.ToString("dd/MM/yyyy HH:mm"),
                 Comentario = trabajo.Comentario,
             };
 
@@ -125,7 +126,7 @@ public class TrabajoController : Controller
         return Json(tiposProfesionMostrar);
     }
 
-      public JsonResult AgregarTrabajo( int PersonaID, int TrabajoID, int ProfesionID, int? ImagenID, string direccion, string descripcion, DateTime hora, DateTime fecha, int valoracion, string comentario)
+    public JsonResult AgregarTrabajo(int PersonaID, int TrabajoID, int ProfesionID, int? ImagenID, string direccion, string descripcion, DateTime hora, DateTime fecha, int valoracion, string comentario)
     {
 
         var trabajoExistente = _context.Trabajos.FirstOrDefault(s => s.PersonaID == PersonaID && s.ProfesionID == ProfesionID);
@@ -145,74 +146,106 @@ public class TrabajoController : Controller
             {
 
                 PersonaID = PersonaID,
-             
                 ProfesionID = ProfesionID,
-       
                 Direccion = direccion,
                 Descripcion = descripcion,
-                 Hora = hora,
-                 Fecha = fecha,
-         
+                Hora = hora,
+                Fecha = fecha,
+                Comentario = comentario,
+
 
             };
 
             _context.Add(trabajo);
             _context.SaveChanges();
 
-                        return Json(new { success = true, message = "Trabajo guardado exitosamente." });
+            return Json(new { success = true, message = "Trabajo guardado exitosamente." });
 
-    
 
-    }else{
-            var trabajoEditar = _context.Trabajos.FirstOrDefault (t => t.TrabajoID == TrabajoID);
+
+        }
+        else
+        {
+            var trabajoEditar = _context.Trabajos.Where(t => t.TrabajoID == TrabajoID).SingleOrDefault();
             if (trabajoEditar != null)
             {
-             
 
-                trabajoEditar.ProfesionID = ProfesionID;
-           
-         
+
+
                 trabajoEditar.Direccion = direccion;
                 trabajoEditar.Descripcion = descripcion;
                 trabajoEditar.Hora = hora;
                 trabajoEditar.Fecha = fecha;
-              
+                trabajoEditar.Comentario = comentario;
 
-                 
-            _context.SaveChanges();
 
-                 return Json(new { success = true, message = "trabajo actualizado exitosamente." });
-                }
-                else
-                {
-                    return Json(new { success = false, message = "trabajo no encontrado." });
-                }
-                
+
+                _context.SaveChanges();
+
+                return Json(new { success = true, message = "trabajo actualizado exitosamente." });
             }
+            else
+            {
+                return Json(new { success = false, message = "trabajo no encontrado." });
+            }
+
+        }
     }
 
-       public JsonResult  EliminarTrabajo (int trabajoID)
- {
-
-      
-
-     var TrabajoEliminar = _context.Trabajos.Find(trabajoID);
-    _context.Remove(TrabajoEliminar);
-    _context.SaveChanges();
-     return Json(true);
+    public JsonResult EliminarTrabajo(int trabajoID)
+    {
 
 
-   
- }
 
-    
+        var TrabajoEliminar = _context.Trabajos.Find(trabajoID);
+        _context.Remove(TrabajoEliminar);
+        _context.SaveChanges();
+        return Json(true);
+
+
 
     }
 
     
- 
+public JsonResult RecuperarTrabajo(int id)
+{
+    var trabajos = _context.Trabajos
+        .Include(s => s.Persona)
+        .Include(s => s.Profesion)              
+        .ToList();
 
-    
+    if (id > 0)
+    {
+        trabajos = trabajos.Where(p => p.TrabajoID == id).ToList();
+    }
 
-    
+    var perfilMostrar = trabajos.Select(p => new VistaTrabajoPersonas
+    {
+
+        TrabajoID = p.TrabajoID,
+        ProfesionID = p.ProfesionID,
+        PersonaID = p.PersonaID,
+        Direccion = p.Direccion,
+        Descripcion = p.Descripcion,
+        Hora = p.Hora,
+        Fecha = p.Fecha,
+        Comentario = p.Comentario,
+    }).ToList();
+
+    return Json(perfilMostrar);
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
