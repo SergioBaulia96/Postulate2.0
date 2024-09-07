@@ -11,11 +11,11 @@ namespace Postulate.Controllers;
 public class PersonaController : Controller
 {
     private readonly ILogger<PersonaController> _logger;
-    
+
         private readonly ApplicationDbContext _context;
             private readonly UserManager<IdentityUser> _userManager; // obtener correo
 
-    public PersonaController(ILogger<PersonaController> logger,ApplicationDbContext context,UserManager<IdentityUser> userManager) 
+    public PersonaController(ILogger<PersonaController> logger,ApplicationDbContext context,UserManager<IdentityUser> userManager)
     {
         _logger = logger;
         _context = context;
@@ -24,7 +24,7 @@ public class PersonaController : Controller
     }
 
 
- 
+
     public IActionResult Index()
     {     // Obtener el correo del usuario logueado
 
@@ -42,7 +42,7 @@ public class PersonaController : Controller
     // Pasar el nombre a ViewBag
     ViewBag.NombrePersona = nombrePersona;
 
-    
+
 
         // Cargar provincias de la base de datos
         var provincias = _context.Provincias.ToList();
@@ -74,41 +74,44 @@ public class PersonaController : Controller
 
         // Retornar la vista "Persona" con los datos cargados en ViewBag
         return View("Persona");
-      
+
     }
 
-    public ActionResult TraerDatosPersonal( int  Id, string? nombre, string? apellido, int edad, int telefono,int correo)
+    // public ActionResult TraerDatosPersonal( int  Id, string? nombre, string? apellido, int edad, int telefono,int correo)
 
-    {  
-       
-        List <VistaTraerDatosPersonal> TraerDatosPersonal = new List<VistaTraerDatosPersonal>();
-        var personas = _context.Personas.ToList();
+    // {
 
-        if (Id != null)
-        {
-            personas = personas.Where(a => a.PersonaID == Id).ToList();  
-        }
+    //     List <VistaTraerDatosPersonal> TraerDatosPersonal = new List<VistaTraerDatosPersonal>();
+    //     var personas = _context.Personas.ToList();
 
-        foreach (var persona in personas)
-    {
-        var datosPersona = new VistaTraerDatosPersonal
-        {
-            PersonaID = persona.PersonaID,
-              LocalidadID = persona.LocalidadID,
-            Nombre = persona.Nombre,
-            Apellido = persona.Apellido,
-            Edad = persona.Edad,
-            Telefono = persona.Telefono,
-            Email = persona.Email
-        };
-        
-        TraerDatosPersonal.Add(datosPersona);
-    }
+    //     if (Id != null)
+    //     {
+    //         personas = personas.Where(a => a.PersonaID == Id).ToList();
+    //     }
 
-    return Json(TraerDatosPersonal);
-       
-    }
+    //     foreach (var persona in personas)
+    // {
+    //     var datosPersona = new VistaTraerDatosPersonal
+    //     {
+    //         PersonaID = persona.PersonaID,
+    //           LocalidadID = persona.LocalidadID,
+    //         Nombre = persona.Nombre,
+    //         Apellido = persona.Apellido,
+    //         Edad = persona.Edad,
+    //         Telefono = persona.Telefono,
+    //         Email = persona.Email
+    //     };
 
+    //     TraerDatosPersonal.Add(datosPersona);
+    // }
+
+    // return Json(TraerDatosPersonal);
+
+    // }
+
+
+
+// en guardar se guardar los datos del formulario de ingreso de la persona 
 [HttpPost]
 public ActionResult Guardar(int localidadId, int? personaID, string nombre, string apellido, int edad, int telefono, int documento, string? correo)
 {
@@ -163,7 +166,7 @@ public ActionResult Guardar(int localidadId, int? personaID, string nombre, stri
                 personaEditar.Edad = edad;
                 personaEditar.Telefono = telefono;
                 personaEditar.Documento = documento;
-                personaEditar.Email = correo;
+
                 _context.SaveChanges();
                 resultado = "Usuario actualizado correctamente";
             }
@@ -178,21 +181,33 @@ public ActionResult Guardar(int localidadId, int? personaID, string nombre, stri
 }
 
 
-
+// en esta vista se recupera los datos para crear el listado y luego poder editarlos
 
 public IActionResult VistaPersona()
         {
+             // Cargar localidades de la base de datos
+        var localidades = _context.Localidades.ToList();
+        var localidadesBuscar = localidades.ToList();
 
-            
+        // Agregar opciones de selección predeterminadas
+        localidades.Add(new Localidad { LocalidadID = 0, Nombre = "[SELECCIONE...]" });
+        localidadesBuscar.Add(new Localidad { LocalidadID = 0, Nombre = "[TODAS LAS LOCALIDADES]" });
+
+        // Asignar las listas de selección al ViewBag con las claves correctas
+        ViewBag.LocalidadID = new SelectList(localidades.OrderBy(c => c.Nombre), "LocalidadID", "Nombre");
+        ViewBag.LocalidadBuscarID = new SelectList(localidadesBuscar.OrderBy(c => c.Nombre), "LocalidadID", "Nombre");
+
              return View("VistaPersona");
-          
+
+
+
         }
 
-
+// recuperar perfil es para recuperar los datos y posterior mente editarlos en GuardarPerfil
     public JsonResult RecuperarPerfilPersona(int id)
 {
     var personas = _context.Personas
-        .Include(p => p.Localidad) // Asegúrate de incluir la entidad Localidad
+        .Include(p => p.Localidad)
         .ToList();
 
     if (id > 0)
@@ -202,7 +217,7 @@ public IActionResult VistaPersona()
 
     var personaMostrar = personas.Select(p => new VistaTraerDatosPersonal
     {
-        PersonaID = p.PersonaID,    
+        PersonaID = p.PersonaID,
         NombreLocalidad = p.Localidad.Nombre,
         Nombre = p.Nombre,
         Apellido = p.Apellido,
@@ -216,12 +231,55 @@ public IActionResult VistaPersona()
 }
 
 
+// en GuardarPerfil en esta vista esta elaborado para editar desde la vista persona
+
+public ActionResult GuardarPerfil(int localidadId, int? personaID, string nombre, string apellido, int edad, int telefono, int documento, string? correo)
+{
+    string resultado = "Error al guardar el formulario";
+
+    if (personaID == 0 || !personaID.HasValue)
+    {
+        var Nuevousuario = new Persona
+        {
+            LocalidadID = localidadId,
+            Nombre = nombre,
+            Apellido = apellido,
+            Edad = edad,
+            Telefono = telefono,
+            Documento = documento,
+            Email = correo
+        };
+        _context.Personas.Add(Nuevousuario);
+        _context.SaveChanges();
+        resultado = "Usuario guardado correctamente";
+    }
+    else
+    {
+        var personaEditar = _context.Personas.Where(e => e.PersonaID == personaID).SingleOrDefault();
+        if (personaEditar != null)
+        {
+            // personaEditar.LocalidadID = localidadId;
+            personaEditar.Nombre = nombre;
+            personaEditar.Apellido = apellido;
+            personaEditar.Edad = edad;
+            personaEditar.Telefono = telefono;
+            personaEditar.Documento = documento;
+
+            _context.SaveChanges();
+            resultado = "Usuario actualizado correctamente";
+        }
+    }
+
+    return Json(resultado);
+}
+
+
 }
 
 
 
 
 
-   
-         
+
+
 

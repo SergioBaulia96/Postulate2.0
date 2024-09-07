@@ -70,7 +70,7 @@ public class LocalidadController : Controller
     public IActionResult GuardarLocalidad(int provinciaID, int localidadID, string nombre, int codigoPostal)
     {
         string resultado = "";
-        // if (nombre != null)
+    
         if (!String.IsNullOrEmpty(nombre))
         {
             if (localidadID == 0)

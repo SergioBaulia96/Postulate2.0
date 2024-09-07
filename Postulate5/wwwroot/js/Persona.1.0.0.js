@@ -8,7 +8,7 @@ $(document).ready(function() {
 });
 
 function Guardar() {
-    console.log("probando");
+  
 
     // Limpiar mensajes de error anteriores
     $(".error-message").remove();
