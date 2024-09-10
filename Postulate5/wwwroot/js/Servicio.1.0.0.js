@@ -10,10 +10,10 @@ function agregarServicio() {
     let profesionID = document.getElementById("ProfesionID").value;
     // let nombre = document.getElementById("nombre").value;
     // let imagen = document.getElementById("imagen").files[0]; // Archivo de imagen
-     let herramienta = document.getElementById("herramienta").checked;
-    let descripcion = document.getElementById("descripcion").value;
-    let titulo = document.getElementById("titulo").value;
-    let institucion = document.getElementById("institucion").value;
+    //  let herramienta = document.getElementById("herramienta").checked;
+    // let descripcion = document.getElementById("descripcion").value;
+    // let titulo = document.getElementById("titulo").value;
+    // let institucion = document.getElementById("institucion").value;
 
     // Crear un objeto FormData para enviar archivos
     let formData = new FormData();
@@ -21,10 +21,10 @@ function agregarServicio() {
     formData.append("PersonaID", personaID);
     formData.append("ProfesionID", profesionID);
  
-    formData.append("Herramienta", herramienta);
-    formData.append("Descripcion", descripcion);
-    formData.append("Titulo", titulo);
-    formData.append("Institucion", institucion);
+    // formData.append("herramienta", herramienta);
+    // formData.append("Descripcion", descripcion);
+    // formData.append("Titulo", titulo);
+    // formData.append("Institucion", institucion);
 
     $.ajax({
         // URL para la petición

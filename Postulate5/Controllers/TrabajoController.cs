@@ -69,7 +69,7 @@ public class TrabajoController : Controller
 
         List<VistaProfesion> tiposProfesionMostrar = new List<VistaProfesion>();
 
-        // Obtener las profesiones de los servicios propuestos por el usuario logueado
+        // con este filtro obtenemos las profesiones de los servicios propuestos por el usuario logueado
         var serviciosPropuestos = _context.Servicios
             .Include(s => s.Profesion)
             .Where(s => s.Persona.Email == correoUsuarioLogueado)
@@ -77,7 +77,7 @@ public class TrabajoController : Controller
             .Distinct()
             .ToList();
 
-        // Filtrar los trabajos basados en las profesiones de los servicios propuestos
+        // con este filtro obtenemos trabajos basados en las profesiones de los servicios propuestos
         var trabajos = _context.Trabajos
             .Include(t => t.Persona)
             .Include(t => t.Profesion)

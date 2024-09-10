@@ -2,7 +2,7 @@ window.onload = RecuperarPerfilPersona();
 
 function RecuperarPerfilPersona() {
     $.ajax({
-        url: '../../Persona/RecuperarPerfilPersona',
+        url: '../../Persona/RecuperarPerfilPersonaLogeada',
         data: {},
         type: 'POST',
         dataType: 'json',
@@ -59,7 +59,7 @@ function EditarPefil(personaID) {
     document.getElementById("PersonaID").value = personaID;
 
     $.ajax({
-        url: '../../Persona/RecuperarPerfilPersona',
+        url: '../../Persona/RecuperarPerfilPersonaLogeada',
         data: { id: personaID },
         type: 'POST',
         dataType: 'json',
@@ -93,7 +93,7 @@ function GuardarPerfil() {
     var localidadId =$('#LocalidadID').val();
 
     $.ajax({
-        url: '/Persona/GuardarPerfil',
+        url: '/Persona/GuardarPerfilLogeada',
         type: 'POST',
         data: {
             personaID: personaID,
