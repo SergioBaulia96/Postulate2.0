@@ -27,7 +27,7 @@ public class LocalidadController : Controller
         var provinciasBuscar = provincias.ToList();
 
         // Agregar opciones de selección predeterminadas
-        provincias.Add(new Provincia { ProvinciaID = 0, Nombre = "[SELECCIONE...]" });
+        provincias.Add(new Provincia { ProvinciaID = 0, Nombre = "[PROVINCIAS...]" });
         provinciasBuscar.Add(new Provincia { ProvinciaID = 0, Nombre = "[TODAS LAS PROVINCIAS]" });
 
         // Asignar las listas de selección al ViewBag con las claves correctas

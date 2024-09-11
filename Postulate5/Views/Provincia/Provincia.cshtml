@@ -17,20 +17,19 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="ModalTitulo"></h5>
+            <h5 class="modal-title" id="ModalTitulo">Nueva Provincia</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-
-            <div class="input-group flex-nowrap">
-              <span class="input-group-text" id="addon-wrapping"></span>
+            <form action="">
               <input type="hidden" id="ProvinciaID" value="0">
-              <label for="nombreProvincia" class="form-label">Nombre de Provincia</label>
 
-              <input type="text" class="form-control" id="nombreProvincia" placeholder="Nombre del tipo de actividad">
+            <div>
+              <label for="nombreProvincia" class="form-label">Nombre de Provincia</label>
+              <input type="text" class="form-control" id="nombreProvincia">
             </div>
 
-
+          </form>
           </div>
           <div class="modal-footer">
             <button type="button" onclick="LimpiarModal();" class="btn btn-secondary"

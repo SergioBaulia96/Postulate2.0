@@ -1,6 +1,7 @@
-<head>
-  <link rel="stylesheet" href="~/css/Localidad.css" asp-append-version="true" />
-</head>
+@{
+  ViewData["Title"] = "Localidades";
+}
+
 <body class="color-fondo-body">
 <section class="container-administracion">
 <h1 class="titulos">Localidades</h1>
@@ -18,34 +19,25 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="ModalTitulo" ></h5>
+        <h5 class="modal-title" id="ModalTitulo" >Nueva Localidad</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-
-           <div >
+        <form action="">
             <input type="hidden" id="LocalidadID" value="0" />
-          
-              <label for="ProvinciaID" class="form-label">Tipo de Ejercicio</label>
+
+            <div class="input-group flex-nowrap mb-3">
+              <label for="ProvinciaID" class="form-label"></label>
               @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" })
             </div>
 
-        
-       <div class="input-group flex-nowrap">
-  <span class="input-group-text" id="addon-wrapping"></span>
-  <input type="hidden" id="LocalidadID" value="0">
-  <label for="nombreLocalidad" class="form-label">Nombre de Localidad</label>
+            <label for="nombreLocalidad" class="form-label">Nombre de Localidad</label>
+            <input type="text" class="form-control" id="nombreLocalidad">
 
-    <input type="text" class="form-control" id="nombreLocalidad" placeholder="Nombre de la localidad">
+            <label for="codigoPostal" class="form-label">Codigo Postal</label>
+            <input type="number" class="form-control" id="CodigoPostal">
 
-      <span class="input-group-text" id="addon-wrapping"></span>
-  <input type="hidden" id="codigoPostal" >
-  <label for="codigoPostal" class="form-label">Codigo Postal</label>
-
-    <input type="text" class="form-control" id="CodigoPostal" placeholder="Codigo Postal">
-</div>
-
-
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" onclick="LimpiarModal();" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
