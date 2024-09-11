@@ -1,4 +1,17 @@
+
+
+.container-servicio{
+    background: var(--bs-dark-bg-subtle);
+    height: 85vh;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+
+
 /* Contenedor de botones centrado */
+
 .boton-container {
     display: flex;
     justify-content: center;

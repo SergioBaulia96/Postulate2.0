@@ -1,146 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
+@{
+  ViewData["Title"] = "Servicios";
+}
 
-<head>
+<section class="container-servicio">
 
-
-
-      <script src="~/js/CardServicio1.0.0.js"></script>
-    <script src="~/js/Servicio.1.0.0.js"></script>
-       <link rel="stylesheet" href="~/css/Servicio.css" asp-append-version="true" />
-</head>
-
-
-
-<body>
-
-  <!-- Otros elementos de la página -->
-
-  <div class="boton-container">
-    <button type="button" class="btn btn-primary boton" data-bs-toggle="modal" data-bs-target="#agregarServicio">Agregar
-      Servicio</button>
-  </div>
-
-
-  <div class="conte">
-    <div class="contenedor-card card id=" ServicioID">
-
-      <div id="contenedorCards" class="row"></div>
-    </div>
-
-    <div class="modal fade tamaño-color-modal" id="agregarServicio" data-bs-backdrop="static" data-bs-keyboard="false"
-      tabindex="-1" aria-labelledby="exampledModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content modal_style">
-          <div class="modal-header">
-            <h1 class="modal-title" id="exampleModalLabel" style="color:;">Nuevo Servicio</h1>
-          </div>
-          <div class="modal-body">
-            <form action="javascript:void(0)" method="post" class="row g-3">
-              <input type="hidden" id="ServicioID" value="0" />
-              <div class="col-md-6">
-                <label for="ProfesionID" class="form-label text-dark">Profesion</label>
-                @Html.DropDownList("ProfesionID", null, htmlAttributes: new
-                  {
-                    @class = "form-control",
-                    id =
-                       "ProfesionID"
-                  })
-              </div>
-         
-
-              <div class="col-md-6">
-                <div class="form-check">
-                  <input type="checkbox" id="herramienta" class="form-check-input">
-                  <label for="herramienta" class="form-check-label">Herramientas</label>
-                </div>
-                <div class="modal-body">
-          
-
-    
-     <!-- Campo oculto para el PersonaID -->
-<input type="text" id="PersonaID" value="@ViewBag.PersonaIDLogueada" />
-
-<!-- Mostrar el nombre de la persona logueada -->
-<div class="col-md-6">
-    <label for="NombrePersona" class="form-label">Nombre</label>
-    <input type="text" id="NombrePersona" class="form-control" value="@ViewBag.NombrePersonaLogueada" readonly />
+<div class="boton-container">
+  <button type="button" class="btn btn-primary boton" data-bs-toggle="modal" data-bs-target="#agregarServicio">Agregar Servicio</button>
 </div>
-                        @* <input type="hidden" id="PersonaID" value="1" /> *@
 
+
+<div class="conte">
+  <div class="contenedor-card card" id="ServicioID">
+  <div id="contenedorCards" class="row"></div>
+</div>
+
+  <div class="modal fade tamaño-color-modal" id="agregarServicio" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="exampledModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content modal_style">
+        <div class="modal-header">
+          <h1 class="modal-title" id="exampleModalLabel" style="color:;">Nuevo Servicio</h1>
+        </div>
+        <div class="modal-body">
+          <form action="javascript:void(0)" method="post" class="row g-3">
+
+            <input type="hidden" id="ServicioID" value="0" />
             
-    
-                        
-                        @* <div class="col-md-6">
-                            <label for="PersonaID" class="form-label">Nombre</label>
-                            @Html.DropDownList("PersonaID", null, htmlAttributes: new { @class = "form-control" })
-                        </div> *@
+              <div class="col-md-6">
+                  <label for="NombrePersona" class="form-label">Nombre</label>
+                  <input type="text" id="NombrePersona" class="form-control" value="@ViewBag.NombrePersonaLogueada" readonly />
+              </div>
 
-                        @* <div class="col-md-6">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" id="nombre" class="form-control" placeholder="Nombre">
-                        </div> *@
-
-                        @* <div class="col-md-6">
-                            <label for="imagen" class="form-label">Imagen</label>
-                            <input type="file" id="imagen" class="form-control" placeholder="Imagen">
-                        </div> *@
-
-                        @* <div class="col-md-6">
-                            <div class="form-check">
-                                <input type="checkbox" id="herramienta" class="form-check-input">
-                                <label for="herramienta" class="form-check-label">Herramientas</label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="descripcion" class="form-label">Descripción</label>
-                            <input type="text" id="descripcion" class="form-control" placeholder="Descripción">
-                        </div> *
-
-                         <div class="col-md-6">
-                            <label for="titulo" class="form-label">Título</labelg>
-                            <input type="text" id="titulo" class="form-control" placeholder="Título">
-                        </div> 
-
-                        <div class="col-md-6">
-                            <label for="institucion" class="form-label">Institución</label>
-                            <input type="text" id="institucion" class="form-control" placeholder="Institución">
-                        </div>  *@
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"onclick="LimpiarModal()" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="agregarServicio()">Guardar cambios</button>
-              
+            <div class="col-md-6">
+              <label for="ProfesionID" class="form-label text-dark">Profesion</label>
+              @Html.DropDownList("ProfesionID", null, htmlAttributes: new
+                {
+                  @class = "form-control",
+                  id = "ProfesionID"
+                })
             </div>
+            
+              <div class="modal-body">
+                <!-- Campo oculto para el PersonaID -->
+                <input type="hidden" id="PersonaID" value="@ViewBag.PersonaIDLogueada" />
+                <!-- Mostrar el nombre de la persona logueada -->
+              </div>
+
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="LimpiarModal()" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="agregarServicio()">Guardar cambios</button>
         </div>
       </div>
-
-
     </div>
+  </div>
 
-    @* <script>
-      // Script para habilitar las validaciones personalizadas de Bootstrap
-      (() => {
-        'use strict';
-        const forms = document.querySelectorAll('.needs-validation');
+</section>
 
-        Array.from(forms).forEach((form) => {
-          form.addEventListener('submit', (event) => {
-            if (!form.checkValidity()) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-          }, false);
-        });
-      })();
-
-    </script> *@
-</body>
-
-</html>
-@section Scripts {
-  <script src="~/js/Servicio.1.0.0.js"></script>
-}
+  </html>
+  @section Scripts {
+    <script src="~/js/servicio.1.0.0.js"></script>
+  }

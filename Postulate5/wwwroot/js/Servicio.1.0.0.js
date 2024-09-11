@@ -2,25 +2,17 @@
 
 
 function agregarServicio() {
-
- 
-    let personaID = document.getElementById("PersonaID").value;
     let servicioID = document.getElementById("ServicioID").value;
-  
+    let personaID = document.getElementById("PersonaID").value;
     let profesionID = document.getElementById("ProfesionID").value;
-    // let nombre = document.getElementById("nombre").value;
-    // let imagen = document.getElementById("imagen").files[0]; // Archivo de imagen
-    //  let herramienta = document.getElementById("herramienta").checked;
-    // let descripcion = document.getElementById("descripcion").value;
-    // let titulo = document.getElementById("titulo").value;
-    // let institucion = document.getElementById("institucion").value;
+
 
     // Crear un objeto FormData para enviar archivos
     let formData = new FormData();
     formData.append("ServicioID", servicioID);
     formData.append("PersonaID", personaID);
     formData.append("ProfesionID", profesionID);
- 
+
     // formData.append("herramienta", herramienta);
     // formData.append("Descripcion", descripcion);
     // formData.append("Titulo", titulo);
@@ -45,13 +37,13 @@ function agregarServicio() {
                 // Cerrar el modal
                 $('#agregarServicio').modal('hide');
                 // Opcional: recargar la lista de servicios
-                if(servicioID == 0){
+                if (servicioID == 0) {
                     CardServicios();
                 }
-                else{
-                    CargarPerfilServicio();
+                else {
+                    agregarServicio();
                 }
-               
+
             } else {
                 alert("Error al guardar el servicio: " + response.message);
             }
@@ -72,10 +64,10 @@ function EditarServicio() {
             type: 'POST',
             dataType: 'json',
             success: function (servicios) {
-                let servicio = servicios[0]; 
+                let servicio = servicios[0];
 
                 console.log(servicio.herramienta);
-                
+
                 document.getElementById("descripcion").value = servicio.descripcion;
                 document.getElementById("herramienta").checked = servicio.herramienta;
                 document.getElementById("titulo").value = servicio.titulo;
@@ -95,7 +87,7 @@ function EditarServicio() {
 }
 
 
-function LimpiarModal(){
+function LimpiarModal() {
     // document.getElementById("PersonaID").value = 0;
     // document.getElementById("ProfesionID").value = 0;
     // document.getElementById("herramientas").value = "";
