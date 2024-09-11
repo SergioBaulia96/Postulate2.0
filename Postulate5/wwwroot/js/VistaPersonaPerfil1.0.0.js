@@ -59,7 +59,7 @@ function EditarPefil(personaID) {
     document.getElementById("PersonaID").value = personaID;
 
     $.ajax({
-        url: '../../Persona/RecuperarPerfilPersonaLogeada',
+        url: '../../Persona/GuardarPerfilLogeada',
         data: { id: personaID },
         type: 'POST',
         dataType: 'json',

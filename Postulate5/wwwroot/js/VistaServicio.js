@@ -66,14 +66,6 @@ document.addEventListener("DOMContentLoaded", CardServicios);
 
 
 
-    //   <button type="button" class="btn btn-success" onclick="EditarServicio(${persona.servicioID})">
-    //                                     <i class="fa-regular fa-pen-to-square"></i> Editar
-    //                                 </button>
-    //                                 <button type="button" class="btn btn-danger" onclick="EliminarServicio(${persona.servicioID})">
-    //                                     <i class="fa-regular fa-trash-can"></i> Eliminar
-    //                                 </button>
-
-
 
 function agregarServicio() {
 
@@ -172,36 +164,7 @@ function EditarServicio(servicioID) {
 }
 
 
-// function EditarServicio(servicioID) {
-//     $.ajax({
-//         url: '/Servicios/ObtenerServicio', // Cambiar al endpoint correcto
-//         data: { id: servicioID }, // Enviar el ID del servicio
-//         type: 'GET', // Usar GET para obtener datos
-//         dataType: 'json', // Esperar una respuesta JSON
-//         success: function (response) {
-//             if (response.success) {
-//                 let servicio = response.servicio;
 
-//                 document.getElementById("ServicioID").value = servicio.servicioID;
-//                 document.getElementById("PersonaID").value = servicio.personaID;
-//                 document.getElementById("ProfesionID").value = servicio.profesionID;
-//                 document.getElementById("nombre").value = servicio.nombrePersona;
-//                 // document.getElementById("imagen").files[0]; // Manejo de imagen si es necesario
-//                 document.getElementById("herramientas").checked = servicio.herramienta;
-//                 document.getElementById("descripcion").value = servicio.descripcion;
-//                 document.getElementById("titulo").value = servicio.titulo;
-//                 document.getElementById("institucion").value = servicio.institucion;
-
-//                 $('#agregarServicio').modal('show');
-//             } else {
-//                 console.log('Error: ' + response.message);
-//             }
-//         },
-//         error: function (xhr, status) {
-//             console.log('Disculpe, existió un problema al cargar el servicio para editar');
-//         }
-//     });
-// }
 
 function EliminarServicio(servicioID) {
     $.ajax({
