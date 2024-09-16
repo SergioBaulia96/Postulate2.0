@@ -82,3 +82,13 @@
     font-size: 1.25rem; /* Aumenta el tamaño del texto */
     border-radius: 0.5rem;
 }
+
+
+.contenedor-agregar-tbj{
+    margin-left: -800px;
+}
+
+
+.col-md-4{
+    width: 50px;
+}

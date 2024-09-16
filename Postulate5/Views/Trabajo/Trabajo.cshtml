@@ -10,14 +10,14 @@
 </head>
 
 <body>
-    <!-- Botón para abrir el modal de agregar trabajo -->
-    <div class="boton-container">
-        <button type="button" class="btn btn-primary boton" data-bs-toggle="modal"
-            data-bs-target="#agregarTrabajo">Agregar Trabajo</button>
-    </div>
     <!-- Contenedor principal de las tarjetas -->
     <div class="contenedor-card" id="TrabajoID">
-        <div id="contenedorCards" class="row"></div>
+        <div class="contenedor-agregar-tbj">
+            <button style="  --button_radius: 0.75em;--button_color: #e8e8e8;--button_outline_color: #000000;font-size: 17px;font-weight: bold;border: none;border-radius: var(--button_radius);background: var(--button_outline_color);" data-bs-toggle="modal" data-bs-target="#agregarTrabajo">
+            <span class="button_top"> AGREGAR </span>
+            </button>
+      </div>
+        <div id="contenedorCards" class="row"  style="width: 400px;"></div>
     </div>
 
     <!-- Modal para agregar un nuevo trabajo -->
@@ -32,7 +32,6 @@
                 <div class="modal-body">
                     <form  method="post" class="row g-3">
                         <input type="hidden" id="TrabajoID" value ="0">
-                          
     
                         <input type="hidden" id="PersonaID" value="@ViewBag.PersonaIDLogueada" />
 

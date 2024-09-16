@@ -3,70 +3,72 @@
 }
 
 <head>
-<script src="~/js/CardServicio1.0.0.js"></script>
-<script src="~/js/Servicio.1.0.0.js"></script>
-<link rel="stylesheet" href="~/css/Servicio.css" asp-append-version="true" />
+  <script src="~/js/CardServicio1.0.0.js"></script>
+  <script src="~/js/Servicio.1.0.0.js"></script>
+  <link rel="stylesheet" href="~/css/Servicio.css" asp-append-version="true" />
 </head>
 
 
 <section class="container-servicio">
 
-<div class="boton-container">
-  <button type="button" class="btn btn-primary boton" data-bs-toggle="modal" data-bs-target="#agregarServicio">Agregar Servicio</button>
-</div>
 
+  <div class="conte">
+    <div class="contenedor-card card" id="ServicioID">
+      <div class="contenedor-agregar">
+            <button style="  --button_radius: 0.75em;--button_color: #e8e8e8;--button_outline_color: #000000;font-size: 17px;font-weight: bold;border: none;border-radius: var(--button_radius);background: var(--button_outline_color);" data-bs-toggle="modal" data-bs-target="#agregarServicio">
+            <span class="button_top"> AGREGAR </span>
+            </button>
+      </div>
+      <div id="contenedorCards" class="row"></div>
+    </div>
 
-<div class="conte">
-  <div class="contenedor-card card" id="ServicioID">
-  <div id="contenedorCards" class="row"></div>
-</div>
+    <div class="modal fade tamaño-color-modal" id="agregarServicio" data-bs-backdrop="static" data-bs-keyboard="false"
+      tabindex="-1" aria-labelledby="exampledModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content modal_style">
+          <div class="modal-header">
+            <h1 class="modal-title" id="exampleModalLabel" style="color:;">Nuevo Servicio</h1>
+          </div>
+          <div class="modal-body">
+            <form action="javascript:void(0)" method="post" class="row g-3">
 
-  <div class="modal fade tamaño-color-modal" id="agregarServicio" data-bs-backdrop="static" data-bs-keyboard="false"
-    tabindex="-1" aria-labelledby="exampledModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content modal_style">
-        <div class="modal-header">
-          <h1 class="modal-title" id="exampleModalLabel" style="color:;">Nuevo Servicio</h1>
-        </div>
-        <div class="modal-body">
-          <form action="javascript:void(0)" method="post" class="row g-3">
+              <input type="hidden" id="ServicioID" value="0" />
 
-            <input type="hidden" id="ServicioID" value="0" />
-            
               <div class="col-md-6">
-                  <label for="NombrePersona" class="form-label">Nombre</label>
-                  <input type="text" id="NombrePersona" class="form-control" value="@ViewBag.NombrePersonaLogueada" readonly />
+                <label for="NombrePersona" class="form-label">Nombre</label>
+                <input type="text" id="NombrePersona" class="form-control" value="@ViewBag.NombrePersonaLogueada"
+                  readonly />
               </div>
 
-            <div class="col-md-6">
-              <label for="ProfesionID" class="form-label text-dark">Profesion</label>
-              @Html.DropDownList("ProfesionID", null, htmlAttributes: new
-                {
-                  @class = "form-control",
-                  id = "ProfesionID"
-                })
-            </div>
-            
+              <div class="col-md-6">
+                <label for="ProfesionID" class="form-label text-dark">Profesion</label>
+                @Html.DropDownList("ProfesionID", null, htmlAttributes: new
+                  {
+                    @class = "form-control",
+                    id = "ProfesionID"
+                  })
+              </div>
+
               <div class="modal-body">
                 <!-- Campo oculto para el PersonaID -->
                 <input type="hidden" id="PersonaID" value="@ViewBag.PersonaIDLogueada" />
                 <!-- Mostrar el nombre de la persona logueada -->
               </div>
 
-
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onclick="LimpiarModal()" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" onclick="agregarServicio()">Guardar cambios</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="LimpiarModal()"
+              data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" onclick="agregarServicio()">Guardar cambios</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
 </section>
 
-  </html>
-  @section Scripts {
-    <script src="~/js/Servicio.1.0.0.js"></script>
-  }
+</html>
+@section Scripts {
+  <script src="~/js/Servicio.1.0.0.js"></script>
+}
